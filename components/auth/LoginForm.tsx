@@ -14,6 +14,50 @@ export default function LoginForm() {
 
   const { login, register } = useAuth();
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    const tl = gsap.timeline();
+
+    // Initial animation on mount
+    tl.fromTo(
+      containerRef.current,
+      { opacity: 0, scale: 0.8 },
+      { opacity: 1, scale: 1, duration: 1.2, ease: "back.out(1.7)" },
+    )
+      .fromTo(
+        cardRef.current,
+        { y: 100, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+        "-=0.8",
+      )
+      .fromTo(
+        ".auth-title",
+        { y: -30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
+        "-=0.4",
+      )
+      .fromTo(
+        ".form-group",
+        { x: -50, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: "power2.out" },
+        "-=0.3",
+      );
+  }, []);
+
+  useEffect(() => {
+    // Animate form switch
+    if (formRef.current) {
+      gsap.fromTo(
+        ".form-group",
+        { x: isLogin ? 50 : -50, opacity: 0.7 },
+        { x: 0, opacity: 1, duration: 0.4, stagger: 0.05, ease: "power2.out" },
+      );
+    }
+  }, [isLogin]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
