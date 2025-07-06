@@ -108,8 +108,8 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
+    <div ref={containerRef} className="auth-container">
+      <div ref={cardRef} className="auth-card">
         <div className="auth-header">
           <h1 className="auth-title">VibrantHub</h1>
           <p className="auth-subtitle">
@@ -117,7 +117,7 @@ export default function LoginForm() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="auth-form">
+        <form ref={formRef} onSubmit={handleSubmit} className="auth-form">
           {!isLogin && (
             <div className="form-group">
               <label className="form-label">Full Name</label>
