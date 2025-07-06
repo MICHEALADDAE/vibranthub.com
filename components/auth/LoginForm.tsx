@@ -63,14 +63,45 @@ export default function LoginForm() {
     setLoading(true);
     setError("");
 
+    // Loading animation
+    gsap.to(".auth-button", {
+      scale: 0.95,
+      duration: 0.1,
+      yoyo: true,
+      repeat: 1,
+    });
+
     try {
       if (isLogin) {
         await login(email, password);
       } else {
         await register(email, password, name);
       }
+
+      // Success animation
+      gsap.to(cardRef.current, {
+        scale: 1.05,
+        duration: 0.3,
+        yoyo: true,
+        repeat: 1,
+        ease: "power2.inOut",
+      });
     } catch (err: any) {
       setError(err.message);
+
+      // Error shake animation
+      gsap.to(cardRef.current, {
+        x: [-10, 10, -8, 8, -6, 6, -4, 4, 0],
+        duration: 0.6,
+        ease: "power2.out",
+      });
+
+      // Animate error message
+      gsap.fromTo(
+        ".error-message",
+        { y: -20, opacity: 0, scale: 0.8 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" },
+      );
     } finally {
       setLoading(false);
     }
