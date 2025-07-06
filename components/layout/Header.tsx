@@ -54,26 +54,71 @@ export default function Header() {
   };
 
   return (
-    <header className="header">
+    <header ref={headerRef} className="header">
       <div className="header-container">
         <div className="header-brand">
           <h1 className="brand-title">VibrantHub</h1>
         </div>
 
-        <nav className="header-nav">
-          <button className="nav-button">
+        <nav ref={navRef} className="header-nav">
+          <button
+            className="nav-button"
+            onClick={handleNavClick}
+            onMouseEnter={(e) =>
+              gsap.to(e.currentTarget, { y: -3, duration: 0.2 })
+            }
+            onMouseLeave={(e) =>
+              gsap.to(e.currentTarget, { y: 0, duration: 0.2 })
+            }
+          >
             <Home size={24} />
           </button>
-          <button className="nav-button">
+          <button
+            className="nav-button"
+            onClick={handleNavClick}
+            onMouseEnter={(e) =>
+              gsap.to(e.currentTarget, { y: -3, duration: 0.2 })
+            }
+            onMouseLeave={(e) =>
+              gsap.to(e.currentTarget, { y: 0, duration: 0.2 })
+            }
+          >
             <Search size={24} />
           </button>
-          <button className="nav-button">
+          <button
+            className="nav-button"
+            onClick={handleNavClick}
+            onMouseEnter={(e) =>
+              gsap.to(e.currentTarget, { y: -3, duration: 0.2 })
+            }
+            onMouseLeave={(e) =>
+              gsap.to(e.currentTarget, { y: 0, duration: 0.2 })
+            }
+          >
             <PlusSquare size={24} />
           </button>
-          <button className="nav-button">
+          <button
+            className="nav-button"
+            onClick={handleNavClick}
+            onMouseEnter={(e) =>
+              gsap.to(e.currentTarget, { y: -3, duration: 0.2 })
+            }
+            onMouseLeave={(e) =>
+              gsap.to(e.currentTarget, { y: 0, duration: 0.2 })
+            }
+          >
             <Heart size={24} />
           </button>
-          <button className="nav-button">
+          <button
+            className="nav-button"
+            onClick={handleNavClick}
+            onMouseEnter={(e) =>
+              gsap.to(e.currentTarget, { y: -3, duration: 0.2 })
+            }
+            onMouseLeave={(e) =>
+              gsap.to(e.currentTarget, { y: 0, duration: 0.2 })
+            }
+          >
             <User size={24} />
           </button>
         </nav>
