@@ -110,6 +110,314 @@ body {
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
+/* App Layout */
+.app-container {
+  min-height: 100vh;
+  background-color: #fafafa;
+}
+
+/* Header */
+.header {
+  background: white;
+  border-bottom: 1px solid #dbdbdb;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.header-container {
+  max-width: 975px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #262626;
+  transition: all 0.2s;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.nav-button:hover {
+  background-color: #f1f5f9;
+  transform: scale(1.1);
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-welcome {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.login-button,
+.logout-button {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.login-button:hover,
+.logout-button:hover {
+  opacity: 0.9;
+}
+
+.logout-button {
+  background: #ef4444;
+}
+
+/* Main Content */
+.main-content {
+  max-width: 614px;
+  margin: 0 auto;
+  padding: 2rem 20px;
+}
+
+/* Feed */
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.post-card {
+  background: white;
+  border: 1px solid #dbdbdb;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+}
+
+.post-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.username {
+  font-weight: 600;
+  color: #262626;
+  font-size: 0.875rem;
+}
+
+.more-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #8e8e8e;
+  font-size: 1.25rem;
+  padding: 0.25rem;
+}
+
+.post-image-container {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.post-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.post-image:hover {
+  transform: scale(1.02);
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.action-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #262626;
+  padding: 8px;
+  transition: all 0.2s;
+  font-size: 1.5rem;
+}
+
+.action-button:hover {
+  transform: scale(1.1);
+}
+
+.like-button.liked {
+  animation: likeAnimation 0.5s ease;
+}
+
+@keyframes likeAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.post-info {
+  padding: 0 16px 16px;
+}
+
+.likes-count {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+  color: #262626;
+}
+
+.post-caption {
+  margin-bottom: 8px;
+  line-height: 1.4;
+  font-size: 0.875rem;
+  color: #262626;
+}
+
+.caption-username {
+  font-weight: 600;
+}
+
+.post-time {
+  color: #8e8e8e;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Demo Message */
+.demo-message {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.demo-message h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.demo-message ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.demo-message li {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0 16px;
+  }
+
+  .main-content {
+    padding: 1rem 0;
+  }
+
+  .post-card {
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+  }
+
+  .welcome-card {
+    padding: 2rem;
+    margin: 1rem;
+  }
+
+  .welcome-title {
+    font-size: 2.5rem;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header-user .user-welcome {
+    display: none;
+  }
+
+  .nav-button {
+    font-size: 1.25rem;
+  }
+}
+
 /* Auth Components */
 .auth-container {
   min-height: 100vh;
