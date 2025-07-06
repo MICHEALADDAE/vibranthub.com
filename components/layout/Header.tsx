@@ -2,6 +2,8 @@
 
 import { Home, Search, PlusSquare, Heart, User, LogOut } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { gsap } from "gsap";
+import { useEffect, useRef } from "react";
 
 export default function Header() {
   const { user, logout } = useAuth();
