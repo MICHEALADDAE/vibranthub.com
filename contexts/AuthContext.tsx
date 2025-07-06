@@ -74,8 +74,39 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
   };
 
+  const testConnection = async (): Promise<boolean> => {
+    try {
+      console.log("🧪 Testing Appwrite connection...");
+      // Test the connection by trying to get account info
+      await account.get();
+      console.log("✅ Connection test successful");
+      setConnectionError(false);
+      return true;
+    } catch (error) {
+      // If we get a 401, connection is working but user not authenticated
+      if (error instanceof Error && error.message.includes("401")) {
+        console.log("✅ Connection working (user not authenticated)");
+        setConnectionError(false);
+        return true;
+      }
+      console.error("❌ Connection test failed:", error);
+      setConnectionError(true);
+      return false;
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        register,
+        logout,
+        loading,
+        connectionError,
+        testConnection,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
