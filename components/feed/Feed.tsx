@@ -33,7 +33,7 @@ export default function Feed() {
 
   useEffect(() => {
     // Mock data for now
-    setPosts([
+    const mockPosts = [
       {
         id: "1",
         username: "johndoe",
@@ -58,7 +58,47 @@ export default function Feed() {
         liked: true,
         timeAgo: "5 hours ago",
       },
-    ]);
+      {
+        id: "3",
+        username: "alexphoto",
+        avatar:
+          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+        image:
+          "https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=600&h=600&fit=crop",
+        caption: "City lights and urban vibes ✨",
+        likes: 256,
+        liked: false,
+        timeAgo: "1 day ago",
+      },
+    ];
+
+    setPosts(mockPosts);
+
+    // Animate posts loading
+    setTimeout(() => {
+      gsap.fromTo(
+        ".post-card",
+        {
+          y: 100,
+          opacity: 0,
+          scale: 0.8,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: ".feed-container",
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        },
+      );
+    }, 100);
   }, []);
 
   const handleLike = (postId: string) => {
