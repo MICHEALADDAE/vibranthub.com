@@ -28,6 +28,8 @@ interface Post {
 export default function Feed() {
   const { user } = useAuth();
   const [posts, setPosts] = useState<Post[]>([]);
+  const feedRef = useRef<HTMLDivElement>(null);
+  const postsRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     // Mock data for now
