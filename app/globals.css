@@ -31,9 +31,35 @@ body {
   width: 40px;
   height: 40px;
   border: 3px solid #f3f3f3;
-  border-top: 3px solid #3498db;
+  border-top: 3px solid #667eea;
   border-radius: 50%;
   animation: spin 1s linear infinite;
+}
+
+.connection-error {
+  margin-top: 2rem;
+  text-align: center;
+  padding: 1.5rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #dc2626;
+}
+
+.test-button {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.test-button:hover {
+  opacity: 0.9;
 }
 
 @keyframes spin {
