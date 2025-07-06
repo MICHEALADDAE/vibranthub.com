@@ -179,9 +179,13 @@ export default function Feed() {
   };
 
   return (
-    <div className="feed-container">
-      {posts.map((post) => (
-        <div key={post.id} className="post-card">
+    <div ref={feedRef} className="feed-container">
+      {posts.map((post, index) => (
+        <div
+          key={post.id}
+          className="post-card"
+          ref={(el) => (postsRefs.current[index] = el)}
+        >
           <div className="post-header">
             <div className="post-user">
               <img
@@ -203,8 +207,14 @@ export default function Feed() {
           <div className="post-actions">
             <div className="action-buttons">
               <button
-                onClick={() => handleLike(post.id)}
+                onClick={(e) => handleLike(post.id, e.currentTarget)}
                 className={`action-button ${post.liked ? "liked" : ""}`}
+                onMouseEnter={(e) =>
+                  gsap.to(e.currentTarget, { scale: 1.1, duration: 0.2 })
+                }
+                onMouseLeave={(e) =>
+                  gsap.to(e.currentTarget, { scale: 1, duration: 0.2 })
+                }
               >
                 <Heart size={24} fill={post.liked ? "#ff3040" : "none"} />
               </button>
