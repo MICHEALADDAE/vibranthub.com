@@ -26,9 +26,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const checkUser = async () => {
     try {
+      console.log("🔍 Checking user authentication...");
       const currentUser = await account.get();
+      console.log("✅ User authenticated:", currentUser.name);
       setUser(currentUser);
-    } catch {
+    } catch (error) {
+      console.log("ℹ️ User not authenticated (this is normal for first visit)");
+      console.log("Error details:", error);
       setUser(null);
     } finally {
       setLoading(false);
@@ -36,12 +40,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const login = async (email: string, password: string) => {
+    console.log("🔐 Attempting to login...");
     await account.createEmailPasswordSession(email, password);
+    console.log("✅ Login successful");
     await checkUser();
   };
 
   const register = async (email: string, password: string, name: string) => {
+    console.log("📝 Attempting to register...");
     await account.create("unique()", email, password, name);
+    console.log("✅ Registration successful");
     await login(email, password);
   };
 
