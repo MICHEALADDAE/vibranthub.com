@@ -4,6 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import LoginForm from "@/components/auth/LoginForm";
 import Header from "@/components/layout/Header";
 import Feed from "@/components/feed/Feed";
+import ConnectionTest from "@/components/debug/ConnectionTest";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
@@ -62,11 +63,14 @@ export default function Home() {
   }
 
   return (
-    <div className="app-container">
-      <Header />
-      <main className="main-content">
-        <Feed />
-      </main>
-    </div>
+    <>
+      <ConnectionTest />
+      <div className="app-container">
+        <Header />
+        <main className="main-content">
+          <Feed />
+        </main>
+      </div>
+    </>
   );
 }
