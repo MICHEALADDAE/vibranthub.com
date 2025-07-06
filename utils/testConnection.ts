@@ -19,12 +19,12 @@ export async function testAppwriteConnection() {
 
 export async function pingAppwrite() {
   try {
-    const response = await fetch(
-      process.env.VITE_APPWRITE_ENDPOINT + "/health",
-      {
-        method: "GET",
-      },
-    );
+    const endpoint =
+      process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT ||
+      "https://syd.cloud.appwrite.io/v1";
+    const response = await fetch(endpoint + "/health", {
+      method: "GET",
+    });
 
     if (response.ok) {
       console.log("✅ Appwrite server is healthy");
