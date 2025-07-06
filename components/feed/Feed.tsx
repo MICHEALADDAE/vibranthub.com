@@ -101,7 +101,9 @@ export default function Feed() {
     }, 100);
   }, []);
 
-  const handleLike = (postId: string) => {
+  const handleLike = (postId: string, buttonElement: HTMLButtonElement) => {
+    const wasLiked = posts.find((p) => p.id === postId)?.liked;
+
     setPosts(
       posts.map((post) =>
         post.id === postId
@@ -113,6 +115,67 @@ export default function Feed() {
           : post,
       ),
     );
+
+    // Heart animation
+    const tl = gsap.timeline();
+
+    if (!wasLiked) {
+      // Like animation
+      tl.to(buttonElement, {
+        scale: 1.3,
+        duration: 0.1,
+        ease: "power2.out",
+      })
+        .to(buttonElement, {
+          scale: 1,
+          duration: 0.3,
+          ease: "elastic.out(1, 0.3)",
+        })
+        .to(
+          buttonElement.querySelector("svg"),
+          {
+            fill: "#ff3040",
+            duration: 0.2,
+          },
+          0,
+        );
+
+      // Create floating hearts
+      for (let i = 0; i < 3; i++) {
+        const heart = document.createElement("div");
+        heart.innerHTML = "❤️";
+        heart.style.position = "absolute";
+        heart.style.fontSize = "12px";
+        heart.style.pointerEvents = "none";
+        heart.style.zIndex = "1000";
+
+        const rect = buttonElement.getBoundingClientRect();
+        heart.style.left = rect.left + Math.random() * 20 + "px";
+        heart.style.top = rect.top + "px";
+
+        document.body.appendChild(heart);
+
+        gsap.to(heart, {
+          y: -50,
+          x: (Math.random() - 0.5) * 40,
+          opacity: 0,
+          scale: 0.5,
+          duration: 1.5,
+          ease: "power2.out",
+          onComplete: () => heart.remove(),
+        });
+      }
+    } else {
+      // Unlike animation
+      tl.to(buttonElement, {
+        scale: 0.8,
+        duration: 0.1,
+      }).to(buttonElement, {
+        scale: 1,
+        duration: 0.2,
+        ease: "power2.out",
+      });
+    }
   };
 
   return (
