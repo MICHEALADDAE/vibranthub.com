@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 export default function Home() {
-  const { user, loading } = useAuth();
+  const { user, loading, connectionError, testConnection } = useAuth();
   const loadingRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,6 +45,14 @@ export default function Home() {
       <div ref={loadingRef} className="loading-container">
         <div className="loading-spinner"></div>
         <p className="loading-text">Connecting to VibrantHub...</p>
+        {connectionError && (
+          <div className="connection-error">
+            <p>Connection timeout. Let's test the connection:</p>
+            <button onClick={testConnection} className="test-button">
+              Test Connection
+            </button>
+          </div>
+        )}
       </div>
     );
   }
