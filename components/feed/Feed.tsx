@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Heart,
   MessageCircle,
@@ -9,6 +9,10 @@ import {
   MoreHorizontal,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Post {
   id: string;
