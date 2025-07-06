@@ -1,76 +1,84 @@
 "use client";
 
-import { useAuth } from "@/contexts/AuthContext";
-import LoginForm from "@/components/auth/LoginForm";
-import Header from "@/components/layout/Header";
-import Feed from "@/components/feed/Feed";
-import ConnectionTest from "@/components/debug/ConnectionTest";
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
+import { useState } from "react";
 
 export default function Home() {
-  const { user, loading, connectionError, testConnection } = useAuth();
-  const loadingRef = useRef<HTMLDivElement>(null);
+  const [showApp, setShowApp] = useState(false);
 
-  useEffect(() => {
-    if (loading && loadingRef.current) {
-      // Professional loading animation
-      gsap.fromTo(
-        ".loading-spinner",
-        { rotation: 0 },
-        { rotation: 360, duration: 1, repeat: -1, ease: "none" },
-      );
-
-      gsap.fromTo(
-        ".loading-text",
-        { opacity: 0.5 },
-        {
-          opacity: 1,
-          duration: 1,
-          yoyo: true,
-          repeat: -1,
-          ease: "power2.inOut",
-        },
-      );
-
-      gsap.fromTo(
-        loadingRef.current,
-        { scale: 0.8, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" },
-      );
-    }
-  }, [loading]);
-
-  if (loading) {
+  if (!showApp) {
     return (
-      <div ref={loadingRef} className="loading-container">
-        <div className="loading-spinner"></div>
-        <p className="loading-text">Connecting to VibrantHub...</p>
-        {connectionError && (
-          <div className="connection-error">
-            <p>Connection timeout. Let's test the connection:</p>
-            <button onClick={testConnection} className="test-button">
-              Test Connection
-            </button>
+      <div className="welcome-container">
+        <div className="welcome-card">
+          <h1 className="welcome-title">🚀 VibrantHub</h1>
+          <p className="welcome-subtitle">Your Instagram Clone is Ready!</p>
+          <div className="status-grid">
+            <div className="status-item">
+              <span className="status-icon">✅</span>
+              <span>Next.js 14 Ready</span>
+            </div>
+            <div className="status-item">
+              <span className="status-icon">✅</span>
+              <span>GSAP Animations</span>
+            </div>
+            <div className="status-item">
+              <span className="status-icon">✅</span>
+              <span>Appwrite Configured</span>
+            </div>
+            <div className="status-item">
+              <span className="status-icon">✅</span>
+              <span>Responsive Design</span>
+            </div>
           </div>
-        )}
+          <button onClick={() => setShowApp(true)} className="launch-button">
+            Launch Instagram Clone
+          </button>
+        </div>
       </div>
     );
   }
 
-  if (!user) {
-    return <LoginForm />;
-  }
-
   return (
-    <>
-      <ConnectionTest />
-      <div className="app-container">
-        <Header />
-        <main className="main-content">
-          <Feed />
-        </main>
-      </div>
-    </>
+    <div className="app-container">
+      <header className="header">
+        <div className="header-container">
+          <h1 className="brand-title">VibrantHub</h1>
+          <nav className="header-nav">
+            <button className="nav-button">🏠 Home</button>
+            <button className="nav-button">🔍 Search</button>
+            <button className="nav-button">➕ Create</button>
+            <button className="nav-button">❤️ Activity</button>
+            <button className="nav-button">👤 Profile</button>
+          </nav>
+        </div>
+      </header>
+
+      <main className="main-content">
+        <div className="feed-container">
+          <div className="post-card">
+            <div className="post-header">
+              <div className="post-user">
+                <div className="user-avatar">👤</div>
+                <span className="username">vibranthub_user</span>
+              </div>
+            </div>
+            <div className="post-image-container">
+              <div className="demo-image">🌅 Beautiful Demo Post</div>
+            </div>
+            <div className="post-actions">
+              <button className="action-button">❤️ Like</button>
+              <button className="action-button">💬 Comment</button>
+              <button className="action-button">📤 Share</button>
+            </div>
+            <div className="post-info">
+              <div className="likes-count">128 likes</div>
+              <div className="post-caption">
+                <span className="username">vibranthub_user</span> Welcome to
+                VibrantHub! 🎉
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
   );
 }
