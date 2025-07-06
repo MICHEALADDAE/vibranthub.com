@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { gsap } from "gsap";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
