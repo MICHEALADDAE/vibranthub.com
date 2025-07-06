@@ -4,9 +4,12 @@ const client = new Client();
 
 client
   .setEndpoint(
-    process.env.VITE_APPWRITE_ENDPOINT || "https://syd.cloud.appwrite.io/v1",
+    process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT ||
+      "https://syd.cloud.appwrite.io/v1",
   )
-  .setProject(process.env.VITE_APPWRITE_PROJECT_ID || "686a1b7400349bee6318");
+  .setProject(
+    process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID || "686a1b7400349bee6318",
+  );
 
 export const account = new Account(client);
 export const databases = new Databases(client);
