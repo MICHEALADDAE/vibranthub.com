@@ -10,6 +10,8 @@ interface AuthContextType {
   register: (email: string, password: string, name: string) => Promise<void>;
   logout: () => Promise<void>;
   loading: boolean;
+  connectionError: boolean;
+  testConnection: () => Promise<boolean>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -19,9 +21,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     null,
   );
   const [loading, setLoading] = useState(true);
+  const [connectionError, setConnectionError] = useState(false);
 
   useEffect(() => {
-    checkUser();
+    // Add timeout to prevent infinite loading
+    const timeout = setTimeout(() => {
+      if (loading) {
+        console.log("⏰ Loading timeout reached");
+        setLoading(false);
+        setConnectionError(true);
+      }
+    }, 10000); // 10 second timeout
+
+    checkUser().finally(() => {
+      clearTimeout(timeout);
+    });
+
+    return () => clearTimeout(timeout);
   }, []);
 
   const checkUser = async () => {
